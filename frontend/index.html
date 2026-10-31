@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Sarkari Path government opportunity intelligence prototype" />
+    <title>Sarkari Path - Opportunity Intelligence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <aside class="sidebar">
+        <a class="brand" href="#dashboard" aria-label="Sarkari Path dashboard">
+          <span class="brand-mark">SP</span>
+          <span>Sarkari <strong>Path</strong></span>
+        </a>
+
+        <nav class="nav-list" aria-label="Main navigation">
+          <button class="nav-item active" data-view="dashboard"><span>◼</span>Dashboard</button>
+          <button class="nav-item" data-view="explore"><span>⌘</span>Explore opportunities</button>
+          <button class="nav-item" data-view="tracker"><span>◌</span>Application tracker</button>
+          <button class="nav-item" data-view="profile"><span>◎</span>My eligibility profile</button>
+        </nav>
+
+        <div class="sidebar-bottom">
+          <div class="data-status"><span></span>SSC data connected</div>
+          <button class="profile-mini" id="openProfile"><span id="avatarInitial">A</span><b id="profileName">Your profile</b><small>Update details</small></button>
+        </div>
+      </aside>
+
+      <section class="workspace">
+        <header class="topbar">
+          <button class="mobile-menu" aria-label="Open navigation">☰</button>
+          <div class="crumb"><span>INDIA</span><i></i><b>Government opportunity intelligence</b></div>
+          <div class="top-actions">
+            <button class="icon-button" aria-label="Notifications">⌁<em>2</em></button>
+            <button class="outline-button" id="openProfileTop">Complete profile</button>
+          </div>
+        </header>
+
+        <div id="dashboard" class="view active">
+          <section class="hero">
+            <div>
+              <p class="eyebrow">YOUR GOVERNMENT CAREER MAP</p>
+              <h1>Find the roles that<br /><em>fit your profile.</em></h1>
+              <p class="hero-copy">One place to understand official notifications, eligibility, deadlines, and what to do next.</p>
+              <div class="hero-actions">
+                <button class="primary-button" id="buildProfile">Build my profile <span>→</span></button>
+                <button class="text-button" data-view-target="explore">Browse all organisations</button>
+              </div>
+            </div>
+            <div class="hero-orbit" aria-hidden="true">
+              <div class="orbit-core">78<span>role signals</span></div>
+              <div class="orbit-dot one"></div><div class="orbit-dot two"></div><div class="orbit-dot three"></div>
+              <div class="orbit-label one">SSC</div><div class="orbit-label two">PSU</div><div class="orbit-label three">BANKING</div>
+            </div>
+          </section>
+
+          <section class="stats-grid">
+            <article><p>Tracked organisations</p><strong>05</strong><small>1 connected, 4 queued</small></article>
+            <article><p>Official notices indexed</p><strong>717</strong><small>SSC archive corpus</small></article>
+            <article><p>Potential profile matches</p><strong id="matchCount">—</strong><small>Complete your profile</small></article>
+          </section>
+
+          <section class="section-heading"><div><p class="eyebrow">PERSONALISED FOR YOU</p><h2>Opportunity signal</h2></div><button class="text-button" data-view-target="profile">Refine profile →</button></section>
+          <section id="matchCards" class="match-grid"></section>
+
+          <section class="section-heading compact"><div><p class="eyebrow">ORGANISATION EXPLORER</p><h2>Where do you want to begin?</h2></div></section>
+          <section id="organisationCards" class="organisation-grid"></section>
+        </div>
+
+        <div id="explore" class="view">
+          <section class="page-intro"><p class="eyebrow">OFFICIAL SOURCES</p><h1>Explore government<br /><em>opportunities by organisation.</em></h1><p>Every opportunity is tied to an official source, a dated notification, and a transparent eligibility explanation.</p></section>
+          <div class="explore-controls"><label>Organisation<select id="organisationSelect"></select></label><label>Opportunity status<select id="statusSelect"><option>All notices</option><option>Open now</option><option>Upcoming</option><option>Historical</option></select></label></div>
+          <section class="organisation-brief" id="organisationBrief"></section>
+          <section class="section-heading compact"><div><p class="eyebrow">LATEST OFFICIAL INFORMATION</p><h2 id="noticeTitle">SSC notices and opportunities</h2></div></section>
+          <section id="noticeList" class="notice-list"></section>
+        </div>
+
+        <div id="tracker" class="view">
+          <section class="page-intro"><p class="eyebrow">YOUR WORKSPACE</p><h1>Application<br /><em>tracker.</em></h1><p>Save eligible opportunities, keep documents organised, and follow every deadline.</p></section>
+          <div class="empty-card"><span>◌</span><h2>No saved applications yet.</h2><p>Explore opportunities and save the roles you want to pursue.</p><button class="primary-button" data-view-target="explore">Explore opportunities →</button></div>
+        </div>
+
+        <div id="profile" class="view">
+          <section class="page-intro"><p class="eyebrow">ELIGIBILITY ENGINE</p><h1>Your eligibility<br /><em>profile.</em></h1><p>This prototype keeps profile information only in your browser. A production version will use protected account storage.</p></section>
+          <section class="profile-panel" id="profileSummary"></section>
+        </div>
+      </section>
+    </main>
+
+    <button class="assistant-launch" id="openAssistant"><span>✦</span> Ask Path AI</button>
+
+    <dialog id="profileDialog" class="profile-dialog">
+      <form method="dialog" id="profileForm">
+        <div class="dialog-header"><div><p class="eyebrow">STEP 1 OF 1</p><h2>Build your eligibility profile</h2></div><button class="close-dialog" value="cancel" aria-label="Close">×</button></div>
+        <p class="dialog-copy">Start with the facts that official notifications commonly use for eligibility checks.</p>
+        <div class="form-grid">
+          <label>Full name<input id="fullName" required placeholder="Your name" /></label>
+          <label>Age<input id="age" type="number" min="15" max="70" required placeholder="e.g. 24" /></label>
+          <label>Location / state<input id="location" required placeholder="e.g. Tamil Nadu" /></label>
+          <label>Reservation category<select id="category"><option value="UR">UR / General</option><option value="OBC">OBC</option><option value="EWS">EWS</option><option value="SC">SC</option><option value="ST">ST</option><option value="PwBD">PwBD</option></select></label>
+          <label>Highest qualification<select id="qualification"><option value="10th">10th</option><option value="12th">12th</option><option value="diploma">Diploma</option><option value="graduate">Bachelor's degree</option><option value="postgraduate">Postgraduate degree</option></select></label>
+          <label>Stream / discipline<input id="stream" required placeholder="e.g. Computer Science" /></label>
+          <label>Percentage / CGPA<input id="marks" placeholder="e.g. 78%" /></label>
+          <label>GATE score (optional)<input id="gateScore" type="number" min="0" placeholder="e.g. 650" /></label>
+        </div>
+        <div class="dialog-footer"><p>Demo only - no server account is created.</p><button class="primary-button" type="submit">Save profile <span>→</span></button></div>
+      </form>
+    </dialog>
+
+    <dialog id="assistantDialog" class="assistant-dialog">
+      <div class="dialog-header"><div><p class="eyebrow">PATH AI - PROTOTYPE</p><h2>Ask about your options</h2></div><button class="close-dialog" id="closeAssistant" aria-label="Close">×</button></div>
+      <div id="assistantMessages" class="assistant-messages"><div class="bot-message">Ask a question such as “Which SSC roles may suit a graduate?”</div></div>
+      <form id="assistantForm" class="assistant-input"><input id="assistantQuestion" placeholder="Ask about opportunities, eligibility, or deadlines…" required /><button class="primary-button">Send →</button></form>
+    </dialog>
+
+    <script src="app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,10 @@
+# macOS and IDE files
+.DS_Store
+.idea/
+.ipynb_checkpoints/
+__pycache__/
+.venv/
+
+# Generated SSC source material and pipeline outputs stay local.
+# The notebooks regenerate these from official sources.
+data/
