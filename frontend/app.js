@@ -120,7 +120,7 @@ function mockAnswer(question) {
   const text = question.toLowerCase();
   if (text.includes('ssc') || text.includes('graduate')) return 'For the prototype, SSC CGL and Selection Post are shown as potential graduate routes. The production answer will be generated from official notification requirements, with page-level citations.';
   if (text.includes('eligib') || text.includes('age')) return 'Eligibility will be calculated from your saved profile against structured official rules: age, category relaxation, education, discipline, and any role-specific conditions.';
-  return 'Path AI will eventually retrieve only official, indexed notification evidence. Right now this is an interaction mock showing where the RAG assistant will sit.';
+  return 'Compass AI will eventually retrieve only official, indexed notification evidence. Right now this is an interaction mock showing where the RAG assistant will sit.';
 }
 
 $$('.nav-item').forEach(item => item.addEventListener('click', () => switchView(item.dataset.view)));
